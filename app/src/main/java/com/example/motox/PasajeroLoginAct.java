@@ -32,7 +32,7 @@ public class PasajeroLoginAct extends AppCompatActivity {
 
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             if (user != null) {
-                Intent intent = new Intent(PasajeroLoginAct.this, MapActivity.class);
+                Intent intent = new Intent(PasajeroLoginAct.this, PasajeroMapAct.class);
                 startActivity(intent);
                 finish();
                 return;
