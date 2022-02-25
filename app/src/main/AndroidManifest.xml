@@ -13,7 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Motox">
-
+        <activity
+            android:name=".PasajeroMapAct"
+            android:exported="false"
+            android:label="@string/title_activity_pasajero_map" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -29,10 +32,6 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyA7LGk2TzTJcb7NfN3pa9QxoGALAZisV7E" />
 
-        <activity
-            android:name=".PasajeroMapAct"
-            android:exported="false"
-            android:label="@string/title_activity_pasajero_map" />
         <activity
             android:name=".ConductorMapAct"
             android:exported="false"
