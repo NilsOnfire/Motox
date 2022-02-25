@@ -171,7 +171,6 @@ public class PasajeroMapAct extends FragmentActivity implements OnMapReadyCallba
         }
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("driversAvailable");
-
         GeoFire geoFire = new GeoFire(ref);
         geoFire.removeLocation(userId);
     }
