@@ -68,7 +68,7 @@ public class ConductorMapAct extends FragmentActivity implements OnMapReadyCallb
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        
+
         nLogout = findViewById(R.id.logout);
         nLogout.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();
@@ -107,7 +107,7 @@ public class ConductorMapAct extends FragmentActivity implements OnMapReadyCallb
 
                   LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
                   mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                  mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
+                  mMap.animateCamera(CameraUpdateFactory.zoomTo(16));
 
                   String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                   DatabaseReference refAvailable = FirebaseDatabase.getInstance().getReference("conductorDisponible");
@@ -165,9 +165,16 @@ public class ConductorMapAct extends FragmentActivity implements OnMapReadyCallb
         }
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
+    private void conectarConductor(){
+        checkLocationPermission();
+        nFusedLocationClient.requestLocationUpdates(nLocationRequest, nLocationCallback, Looper.myLooper());
+        mMap.setMyLocationEnabled(true);
+    }
+
+    protected void desconectarConductor() {
+        if(nFusedLocationClient != null){
+            nFusedLocationClient.removeLocationUpdates(nLocationCallback);
+        }
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("driversAvailable");
 
