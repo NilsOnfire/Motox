@@ -33,7 +33,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class ConductorMapAct extends FragmentActivity implements OnMapReadyCallback {
+public class PasajeroMapAct extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     Location nLastLocation;
@@ -55,7 +55,7 @@ public class ConductorMapAct extends FragmentActivity implements OnMapReadyCallb
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_conductor_map);
+        setContentView(R.layout.activity_pasajero_map);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         nFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
@@ -66,7 +66,7 @@ public class ConductorMapAct extends FragmentActivity implements OnMapReadyCallb
         nLogout = findViewById(R.id.logout);
         nLogout.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();
-            Intent intent = new Intent(ConductorMapAct.this, MainActivity.class);
+            Intent intent = new Intent(PasajeroMapAct.this, MainActivity.class);
             startActivity(intent);
             finish();
             return;
@@ -92,37 +92,37 @@ public class ConductorMapAct extends FragmentActivity implements OnMapReadyCallb
     }
 
     LocationCallback nLocationCallback = new LocationCallback(){
-      public void onLocationResult(LocationResult locationResult){
-          for(Location location : locationResult.getLocations()){
-              if(getApplicationContext() != null){
-                  if (!pasajeroId.equals("") && nLastLocation != null && location != null){
-                      rideDistance += nLastLocation.distanceTo(location)/1000;
-                  }
+        public void onLocationResult(LocationResult locationResult){
+            for(Location location : locationResult.getLocations()){
+                if(getApplicationContext() != null){
+                    if (!pasajeroId.equals("") && nLastLocation != null && location != null){
+                        rideDistance += nLastLocation.distanceTo(location)/1000;
+                    }
 
-                  LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
-                  mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                  mMap.animateCamera(CameraUpdateFactory.zoomTo(16));
+                    LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                    mMap.animateCamera(CameraUpdateFactory.zoomTo(16));
 
-                  String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                  DatabaseReference refAvailable = FirebaseDatabase.getInstance().getReference("conductorDisponible");
-                  DatabaseReference refWorking = FirebaseDatabase.getInstance().getReference("conductorEnServicio");
-                  GeoFire geoFireAvailable = new GeoFire(refAvailable);
-                  GeoFire geoFireWorking = new GeoFire(refWorking);
+                    String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    DatabaseReference refAvailable = FirebaseDatabase.getInstance().getReference("conductorDisponible");
+                    DatabaseReference refWorking = FirebaseDatabase.getInstance().getReference("conductorEnServicio");
+                    GeoFire geoFireAvailable = new GeoFire(refAvailable);
+                    GeoFire geoFireWorking = new GeoFire(refWorking);
 
-                  switch (pasajeroId){
-                      case "":
-                          geoFireWorking.removeLocation(userId);
-                          geoFireAvailable.setLocation(userId, new GeoLocation(location.getLatitude(), location.getLongitude()));
-                          break;
+                    switch (pasajeroId){
+                        case "":
+                            geoFireWorking.removeLocation(userId);
+                            geoFireAvailable.setLocation(userId, new GeoLocation(location.getLatitude(), location.getLongitude()));
+                            break;
 
-                      default:
-                          geoFireAvailable.removeLocation(userId);
-                          geoFireWorking.setLocation(userId, new GeoLocation(location.getLatitude(), location.getLongitude()));
-                          break;
-                  }
-              }
-          }
-      }
+                        default:
+                            geoFireAvailable.removeLocation(userId);
+                            geoFireWorking.setLocation(userId, new GeoLocation(location.getLatitude(), location.getLongitude()));
+                            break;
+                    }
+                }
+            }
+        }
     };
 
     private void checkLocationPermission() {
@@ -130,13 +130,13 @@ public class ConductorMapAct extends FragmentActivity implements OnMapReadyCallb
             if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)){
                 new AlertDialog.Builder(this).setTitle("Dar Permiso").setMessage("Mensaje solicitud de permiso")
                         .setPositiveButton("Ok", (dialogInterface, i) -> {
-                            ActivityCompat.requestPermissions(ConductorMapAct.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                            ActivityCompat.requestPermissions(PasajeroMapAct.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
                         })
-                    .create()
-                    .show();
+                        .create()
+                        .show();
             }
             else{
-                ActivityCompat.requestPermissions(ConductorMapAct.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                ActivityCompat.requestPermissions(PasajeroMapAct.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             }
         }
     }
@@ -171,7 +171,6 @@ public class ConductorMapAct extends FragmentActivity implements OnMapReadyCallb
         }
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("driversAvailable");
-
         GeoFire geoFire = new GeoFire(ref);
         geoFire.removeLocation(userId);
     }
