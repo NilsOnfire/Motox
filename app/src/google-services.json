@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "604796637611",
+    "project_id": "motox-300c8",
+    "storage_bucket": "motox-300c8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:604796637611:android:b200dfc0f73070567682ee",
+        "android_client_info": {
+          "package_name": "com.example.motox"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "604796637611-hm3s3770mb4v4a8v4i6tjekvksrkda62.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.motox",
+            "certificate_hash": "09c26573b77689f9f7e83e722bf596a2cec33279"
+          }
+        },
+        {
+          "client_id": "604796637611-6cp55pn80ugf80lqr48b33inf3bp2amj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtYUwl_66_ix1flW3us82_BsNnIe5eMgA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "604796637611-6cp55pn80ugf80lqr48b33inf3bp2amj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

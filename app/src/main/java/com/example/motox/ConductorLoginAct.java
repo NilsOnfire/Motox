@@ -58,7 +58,7 @@ public class ConductorLoginAct extends AppCompatActivity {
                     Toast.makeText(ConductorLoginAct.this, "Error al Registrarse", Toast.LENGTH_SHORT).show();
                 }else{
                     String user_id = nAuth.getCurrentUser().getUid();
-                    DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("clientes").child("conductor").child(user_id);
+                    DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("usuarios").child("conductor").child(user_id);
                     current_user_db.setValue(true);
                 }
 

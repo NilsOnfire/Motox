@@ -57,7 +57,7 @@ public class PasajeroLoginAct extends AppCompatActivity {
                     Toast.makeText(PasajeroLoginAct.this, "Error al Registrarse", Toast.LENGTH_SHORT).show();
                 }else{
                     String user_id = nAuth.getCurrentUser().getUid();
-                    DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("clientes").child("pasajero").child(user_id);
+                    DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("usuarios").child("pasajero").child(user_id);
                     current_user_db.setValue(true);
                 }
 
