@@ -1,8 +1,0 @@
-<resources>
-    <string name="app_name">Motox</string>
-    <string name="soy_un_pasajero">Soy un pasajero</string>
-    <string name="soy_un_conductor">Soy un conductor</string>
-    <string name="title_activity_conductor_map">ConductorMapAct</string>
-    <string name="title_activity_maps_prueba">MapsPrueba_Activity</string>
-    <string name="title_activity_pasajero_map">PasajeroMapAct</string>
-</resources>
