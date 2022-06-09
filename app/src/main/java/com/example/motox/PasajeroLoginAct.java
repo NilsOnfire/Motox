@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -17,6 +18,7 @@ public class PasajeroLoginAct extends AppCompatActivity {
 
     private EditText nEmail, nContrasena;
     private Button nLogin, nRegistrarse;
+    private ImageView regresar;
 
     private FirebaseAuth nAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
@@ -27,6 +29,7 @@ public class PasajeroLoginAct extends AppCompatActivity {
         setContentView(R.layout.activity_pasajero_login);
 
         nAuth = FirebaseAuth.getInstance();
+        this.regresar = (ImageView) findViewById(R.id.regresar2);
 
         firebaseAuthListener = firebaseAuth -> {
 
@@ -41,6 +44,12 @@ public class PasajeroLoginAct extends AppCompatActivity {
 
         };
 
+        this.regresar.setOnClickListener(l->{
+            Intent intent = new Intent(PasajeroLoginAct.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        });
+
 
         nEmail = (EditText) findViewById(R.id.email);
         nContrasena = (EditText) findViewById(R.id.contrasena);
@@ -50,18 +59,9 @@ public class PasajeroLoginAct extends AppCompatActivity {
 
         nRegistrarse.setOnClickListener(v -> {
 
-            final String email = nEmail.getText().toString();
-            final String contrasena = nContrasena.getText().toString();
-            nAuth.createUserWithEmailAndPassword(email, contrasena).addOnCompleteListener(PasajeroLoginAct.this, task -> {
-                if (!task.isSuccessful()){
-                    Toast.makeText(PasajeroLoginAct.this, "Error al Registrarse", Toast.LENGTH_SHORT).show();
-                }else{
-                    String user_id = nAuth.getCurrentUser().getUid();
-                    DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("usuarios").child("pasajero").child(user_id);
-                    current_user_db.setValue(true);
-                }
-
-            });
+            Intent intent = new Intent(PasajeroLoginAct.this, RegistroPasajeroAct.class);
+            startActivity(intent);
+            finish();
 
         });
 

@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,13 +23,16 @@ public class ConductorLoginAct extends AppCompatActivity {
 
     private FirebaseAuth nAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
+    private ImageView regresar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conductor_login);
+        this.regresar = (ImageView) findViewById(R.id.regresar);
 
         nAuth = FirebaseAuth.getInstance();
+
 
         firebaseAuthListener = firebaseAuth -> {
 
@@ -41,6 +46,12 @@ public class ConductorLoginAct extends AppCompatActivity {
             }
 
         };
+
+        this.regresar.setOnClickListener(l ->{
+            Intent intent = new Intent(ConductorLoginAct.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        });
 
 
         nEmail = (EditText) findViewById(R.id.email);
